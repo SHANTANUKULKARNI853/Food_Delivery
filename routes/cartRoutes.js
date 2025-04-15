@@ -4,7 +4,8 @@ const { addToCart, getCart, removeFromCart } = require('../controllers/cartContr
 const router = express.Router();
 
 router.post('/add', addToCart);
-router.get('/:userId', getCart);
+router.get('/', getCart);  // Bypassing userId for now
+router.get('/:userId', getCart); // Keep this for future use when authentication is added
 router.post('/remove', removeFromCart);
 
 module.exports = router;
