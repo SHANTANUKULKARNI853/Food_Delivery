@@ -1,44 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const dummyCartItems = [
-    {
-      id: 1,
-      name: "Pizza",
-      price: 200,
-      qty: 2,
-      image:
-        "https://media.istockphoto.com/id/1442417585/photo/person-getting-a-piece-of-cheesy-pepperoni-pizza.jpg?s=612x612&w=0&k=20&c=k60TjxKIOIxJpd4F4yLMVjsniB4W1BpEV4Mi_nb4uJU=",
-    },
-    {
-      id: 2,
-      name: "Burger",
-      price: 100,
-      qty: 1,
-      image:
-        "https://media.istockphoto.com/id/520410807/photo/cheeseburger.jpg?s=612x612&w=0&k=20&c=fG_OrCzR5HkJGI8RXBk76NwxxTasMb1qpTVlEM0oyg4=",
-    },
-  ];
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const total = dummyCartItems.reduce(
-    (sum, item) => sum + item.price * item.qty,
+  // Retrieve the JWT token from localStorage (assuming it's stored there after login)
+  const token = localStorage.getItem("jwtToken");
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        // Send the JWT token in the Authorization header
+        const response = await axios.get("https://food-delivery-gj0r.onrender.com/api/cart", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setCartItems(response.data.items || []);
+      } catch (error) {
+        console.error("Failed to fetch cart:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCart();
+  }, [token]); // Re-fetch cart when the token changes
+
+  const total = cartItems.reduce(
+    (sum, item) => sum + (item.productId?.price || 0) * item.quantity,
     0
   );
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div style={styles.wrapper}>
       <div style={styles.container}>
         <h2 style={styles.heading}>Your Cart</h2>
         <ul style={styles.itemList}>
-          {dummyCartItems.map((item) => (
-            <li key={item.id} style={styles.item}>
-              <img src={item.image} alt={item.name} style={styles.image} />
+          {cartItems.map((item) => (
+            <li key={item.productId?._id} style={styles.item}>
+              <img
+                src={item.productId?.image || "https://via.placeholder.com/80"}
+                alt={item.productId?.name}
+                style={styles.image}
+              />
               <div style={styles.details}>
-                <span style={styles.itemName}>{item.name}</span>
+                <span style={styles.itemName}>{item.productId?.name}</span>
                 <div style={styles.qtyAndPrice}>
-                  <span style={styles.itemQty}>× {item.qty}</span>
-                  <span style={styles.itemPrice}>₹{item.qty * item.price}</span>
+                  <span style={styles.itemQty}>× {item.quantity}</span>
+                  <span style={styles.itemPrice}>
+                    ₹{item.quantity * (item.productId?.price || 0)}
+                  </span>
                 </div>
               </div>
             </li>
@@ -58,7 +75,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    minHeight: "100vh", 
+    minHeight: "100vh",
     padding: "20px",
     boxSizing: "border-box",
     backgroundColor: "#fff",
