@@ -1,0 +1,65 @@
+.tab-content {
+    padding: 10px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-right: 20px;
+    margin-top: -10px;
+}
+.delivery-filters {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    overflow-x: auto;
+}
+.delivery-filters2 {
+    display: flex;
+    gap: 10px;
+    padding: 30px 20px 20px 0;
+    margin: 0 0 10px 50px;
+    overflow-x: auto;
+}
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+
+.filter-item:hover {
+    background-color: #e9e9e9;
+}
+
+.filter-icon {
+    font-size: 14px;
+}
+
+.delivery-filters::-webkit-scrollbar {
+    height: 2px;
+}
+
+.delivery-filters::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.delivery-filters::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
+    border-radius: 4px;
+}
+.dining-image1 {
+    width: 45%;
+    height: 250px;
+    padding-left: 60px;
+}
+.dining-image{
+    width:45%;
+    height: 250px;
+    padding-inline: 20px;
+}

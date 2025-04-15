@@ -1,0 +1,168 @@
+
+.food-carousel-container2 {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 0;
+}
+
+.food-carousel2 {
+    position: relative;
+    padding: 0 50px;
+}
+
+.carousel-item2 {
+    padding: 0 15px;
+    outline: none;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.food-image-container2 {
+    width: 200px;
+    height: 260px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.food-image2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.food-image-container2:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.food-image-container2:hover .food-image2 {
+    transform: scale(1.1);
+}
+
+.food-info2 {
+    padding: 10px;
+    text-align: center;
+}
+
+.food-info2 h3 {
+    margin: 5px 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.sub-title{
+            color: #888;
+            /* Light gray */
+            font-weight: 400;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-style: italic;
+}
+
+.slick-prev2,
+.slick-next2 {
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.slick-prev2:hover,
+.slick-next2:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.slick-prev2 {
+    left: 5px;
+}
+
+.slick-next2 {
+    right: 5px;
+}
+
+.slick-prev2:before,
+.slick-next2:before {
+    color: #fc8019;
+    font-size: 24px;
+    opacity: 1;
+}
+
+.slick-slide2 {
+    margin: 0 10px;
+}
+
+.slick-list2 {
+    margin: 0 -10px;
+    padding: 20px 0;
+    overflow: visible;
+}
+
+.slick-track2 {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .food-image-container2 {
+        width: 220px;
+        height: 220px;
+    }
+
+    .food-carousel2 {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .food-image-container2 {
+        width: 180px;
+        height: 180px;
+    }
+
+    .slick-slide2 {
+        margin: 0 8px;
+    }
+
+    .slick-list2 {
+        margin: 0 -8px;
+    }
+
+    .food-carousel2 {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .food-image-container2 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .food-carousel2 {
+        padding: 0 20px;
+    }
+
+    .slick-prev2,
+    .slick-next2 {
+        width: 30px;
+        height: 30px;
+    }
+
+    .slick-prev2:before,
+    .slick-next2:before {
+        font-size: 18px;
+    }
+}
