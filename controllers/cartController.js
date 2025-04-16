@@ -33,14 +33,39 @@ const addToCart = async (req, res) => {
 // Get cart by user
 const getCart = async (req, res) => {
   const { userId } = req.params;
- 
+  console.log("Fetching cart for userId:", userId);
+
   try {
-    const cart = await Cart.findOne({ user: userId }).populate('items.productId');
-    res.status(200).json(cart);
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    // Fetch the cart and log the items before populate
+    let cart = await Cart.findOne({ user: userId });
+    console.log("Cart before populating:", cart);
+
+    // Populate the productId field
+    cart = await Cart.findOne({ user: userId }).populate('items.productId');
+    console.log("Cart after populating:", cart);  // Log populated cart
+
+    if (!cart) {
+      return res.status(200).json({ items: [] });
+    }
+
+    res.status(200).json({ items: cart.items });
   } catch (error) {
+    console.error("Get Cart Error:", error);
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
+
+
+
+
  
 // Remove item
 const removeFromCart = async (req, res) => {
