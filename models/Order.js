@@ -4,22 +4,32 @@ const orderSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
   },
   items: [
     {
-      foodItem: { type: String, required: true },
-      quantity: { type: Number, required: true },
-      price: { type: Number, required: true }
-    }
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Food',
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
   ],
   totalAmount: {
     type: Number,
-    required: true
+    required: true,
+  },
+  deliveryAddress: {
+    type: String,
+    required: true,
   },
   status: {
     type: String,
-    default: 'Pending'
+    default: 'Pending',
   }
 }, { timestamps: true });
 
