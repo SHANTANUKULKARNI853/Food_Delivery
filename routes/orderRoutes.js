@@ -1,9 +1,9 @@
 const express = require('express');
+const { createOrder, getUserOrders, getAllOrders } = require('../controllers/orderController');
 const router = express.Router();
-const { placeOrder } = require('../controllers/orderController');
-// const { protect } = require('../middleware/authMiddleware');
 
-// POST /api/orders
-router.post('/', protect, placeOrder);
+router.post('/create', createOrder);
+router.get('/user/:userId', getUserOrders);
+router.get('/admin/all', getAllOrders);
 
 module.exports = router;
