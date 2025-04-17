@@ -1,32 +1,36 @@
 const Order = require('../models/Order');
+const Cart = require('../models/Cart');
 
-const createOrder = async (req, res) => {
+exports.placeOrder = async (req, res) => {
+  const userId = req.user._id;
+  const { deliveryAddress } = req.body;
+
   try {
-    const { userId, items, totalAmount } = req.body;
-    const newOrder = new Order({ user: userId, items, totalAmount });
-    await newOrder.save();
-    res.status(201).json({ message: 'Order created successfully', newOrder });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+    const cart = await Cart.findOne({ user: userId }).populate('items.productId', 'costForTwo');
+
+    if (!cart || cart.items.length === 0) {
+      return res.status(400).json({ message: 'Cart is empty' });
+    }
+
+    const totalAmount = cart.items.reduce((acc, item) => {
+      return acc + (item.quantity * (item.productId.costForTwo || 0));
+    }, 0);
+
+    const order = new Order({
+      user: userId,
+      items: cart.items,
+      totalAmount,
+      deliveryAddress,
+    });
+
+    await order.save();
+
+    // Optionally, clear cart after order placed
+    await Cart.findOneAndDelete({ user: userId });
+
+    res.status(201).json({ message: 'Order placed successfully', order });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to place order' });
   }
 };
-
-const getUserOrders = async (req, res) => {
-  try {
-    const orders = await Order.find({ user: req.params.userId });
-    res.status(200).json(orders);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-const getAllOrders = async (req, res) => {
-  try {
-    const orders = await Order.find().populate('user', 'name email');
-    res.status(200).json(orders);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-module.exports = { createOrder, getUserOrders, getAllOrders };
