@@ -57,7 +57,7 @@ const getCart = async (req, res) => {
     }
 
     // Populate the productId field of the cart items
-    cart = await Cart.findOne({ user: userId }).populate('items.productId', 'name price image description category');
+    cart = await Cart.findOne({ user: userId }).populate('items.productId', 'name costForTwo imageUrl description category') ;
 
     // Check if the cart was populated correctly
     console.log("Populated Cart:", cart);

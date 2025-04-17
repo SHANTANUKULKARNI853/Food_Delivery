@@ -15,12 +15,12 @@ const getFoods = async (req, res) => {
 // @route   POST /api/foods
 const addFood = async (req, res) => {
   try {
-    const { name, price, image, description, category } = req.body;
+    const { name, costForTwo, imageUrl, description, category } = req.body;
 
     const newFood = new Food({
       name,
-      price,
-      image,
+      costForTwo,
+      imageUrl,
       description,
       category
     });
