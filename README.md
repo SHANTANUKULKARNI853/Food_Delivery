@@ -5,7 +5,7 @@
 Welcome to the **Food Delivery App**! A full-stack application that allows users to browse restaurants, place orders, and manage their cart. Built with **Node.js**, **Express**, **MongoDB**, and **React.js**, this app provides a seamless experience for both users and admins.
 
 ## 🌐 Live Demo  
-👉 [Visit Live Site]([https://linkedin-clone-git-main-shantanukulkarni853-gmailcoms-projects.vercel.app/](https://vercel.com/shantanukulkarni853-gmailcoms-projects/food-delivery/HPcuXa5xchf5qeFWMxwti4SWtMrp))
+👉 [Visit Live Site]((https://vercel.com/shantanukulkarni853-gmailcoms-projects/food-delivery/HPcuXa5xchf5qeFWMxwti4SWtMrp))
 
 ---
 
