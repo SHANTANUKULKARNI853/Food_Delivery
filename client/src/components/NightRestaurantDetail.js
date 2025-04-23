@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './RestaurantDetail.css';
-
+ 
 const NightRestaurantDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  
+ 
   const nightrestaurants = [
-    {     
+    {    
       id: "65d24g1a4g1a6d4g1a6d4g1a",
       name: "High Ultra Lounge",
       cuisine: ["Asian beers", "Whiskey"],
@@ -56,7 +56,7 @@ const NightRestaurantDetail = () => {
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744818339/an4_dotncd.jpg`,
       discount: "25% OFF"
     },
-    
+   
     {
       id: "65d24g1a4g1a6d4g1a6d4g2a",
       name: "Gin Explorers Club",
@@ -67,16 +67,16 @@ const NightRestaurantDetail = () => {
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744818361/an2_mqj2nx.jpg`,
       discount: "30% OFF"
     }  
-    
+   
   ];
-
+ 
   const restaurant = nightrestaurants.find(r => r.id === id);
-
+ 
   const handleAddToCart = async () => {
     setIsLoading(true);
     try {
-      const testUserId = "65d24f1a4f1a6d4f1a6d4f1a"; 
-      
+      const testUserId = "65d24f1a4f1a6d4f1a6d4f1a";
+     
       const response = await fetch('https://food-delivery-gj0r.onrender.com/api/cart/add', {
         method: 'POST',
         headers: {
@@ -88,17 +88,17 @@ const NightRestaurantDetail = () => {
           quantity: 1
         }),
       });
-
+ 
       if (!response.ok) {
         const errorData = await response.json();
         console.error('API Error:', errorData);
         throw new Error(errorData.message || 'Failed to add to cart');
       }
-
+ 
       const data = await response.json();
       console.log('API Success:', data);
       alert(`${restaurant.name} added to cart successfully!`);
-      
+     
     } catch (error) {
       console.error('Cart Error:', error);
       alert(`Error: ${error.message}\nCheck console for details.`);
@@ -109,28 +109,28 @@ const NightRestaurantDetail = () => {
   const handleBackClick = () => {
     navigate('/', { state: { from: 'nightlife' } });
   };
-
+ 
   return (
     <div className="restaurant-detail-container">
       <button className="back-button" onClick={handleBackClick}>
         &larr; Back to Restaurants
       </button>
-      
+     
       <div className="restaurant-header">
         <div className="restaurant-image-container">
-          <img 
-            src={restaurant.imageUrl} 
-            alt={restaurant.name} 
+          <img
+            src={restaurant.imageUrl}
+            alt={restaurant.name}
             className="restaurant-main-image"
           />
           {restaurant.discount && (
             <div className="detail-discount-badge">{restaurant.discount}</div>
           )}
         </div>
-        
+       
         <div className="restaurant-info">
           <h1>{restaurant.name}</h1>
-          
+         
           <div className="rating-info">
             <span className="rating-badge">
               ⭐ {restaurant.rating}
@@ -138,9 +138,9 @@ const NightRestaurantDetail = () => {
             <span className="delivery-time">{restaurant.deliveryTime}</span>
             <span className="cost-for-two">₹{restaurant.costForTwo} for two</span>
           </div>
-          
-          <button 
-            className="add-to-cart-btn" 
+         
+          <button
+            className="add-to-cart-btn"
             onClick={handleAddToCart}
             disabled={isLoading}
           >
@@ -148,11 +148,11 @@ const NightRestaurantDetail = () => {
           </button>
         </div>
       </div>
-      
+     
       <div className="restaurant-content">
         <h2>About {restaurant.name}</h2>
         <p>Enjoy delicious {restaurant.cuisine.join(", ")} cuisine with fast delivery in {restaurant.deliveryTime}.</p>
-        
+       
         <div className="menu-section">
           <h2>Menu</h2>
           <div className="menu-items">
@@ -178,5 +178,5 @@ const NightRestaurantDetail = () => {
     </div>
   );
 };
-
+ 
 export default NightRestaurantDetail;
