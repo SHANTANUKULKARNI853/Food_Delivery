@@ -46,11 +46,12 @@ function Login() {
             console.log('Login result:', result);
 
             if (result.message === 'Login successful') {
-                toast.success(result.message);
+                toast.success('Login successful. Redirecting to homepage...');
                 localStorage.setItem('user', JSON.stringify(result.user));
                 localStorage.setItem('token', result.token);
-                setTimeout(() => navigate('/'));
-            } else {
+                setTimeout(() => navigate('/'), 2000); // 2 second delay
+            }
+             else {
                 toast.error(result.message || 'Login failed');
             }
         } catch (err) {

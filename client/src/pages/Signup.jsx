@@ -26,9 +26,10 @@ function Signup() {
             const result = await res.json();
 
             if (result.success) {
-                notifySuccess(result.message);
-                setTimeout(() => navigate('/login'), 1000);
-            } else {
+                notifySuccess('Signup successful. Redirecting to login page...');
+                setTimeout(() => navigate('/login'), 2000); // 2 second delay
+            }
+             else {
                 notifyError(result?.error?.details?.[0]?.message || result.message);
             }
         } catch (err) {
