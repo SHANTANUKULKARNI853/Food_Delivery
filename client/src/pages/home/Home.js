@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/common/header/Header';
 import DeliveryContent from '../../components/common/tabcontent/DeliveryContent';
 import DiningContent from '../../components/common/tabcontent/DiningContent';
 import NightlifeContent from '../../components/common/tabcontent/NightlifeContent';
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState('dining');
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(() => {
+    return location.state?.from || 'dining';
+  });
   const [showFilters, setShowFilters] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.from && location.state.from !== activeTab) {
+      setActiveTab(location.state.from);
+    }
+  }, [location.state, activeTab]);
+
+  useEffect(() => {
+    if (location.state?.from) {
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, navigate]);
 
   const handleDeliveryDoubleClick = () => {
     setShowFilters((prev) => !prev);

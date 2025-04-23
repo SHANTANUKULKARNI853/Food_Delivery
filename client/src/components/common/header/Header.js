@@ -1,5 +1,7 @@
+// src/components/Header.js
 import React, { useState } from 'react';
 import { FiSearch, FiMapPin, FiUser, FiChevronDown } from 'react-icons/fi';
+import SearchResults from './searchResults';
 import './Header.css';
 
 const Header = ({ onTabChange, activeTab, onDeliveryDoubleClick }) => {
@@ -42,6 +44,9 @@ const Header = ({ onTabChange, activeTab, onDeliveryDoubleClick }) => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
+              {searchQuery && (
+      <SearchResults query={searchQuery} onClose={() => setSearchQuery('')} />
+    )}
             </div>
           </div>
 
@@ -54,6 +59,8 @@ const Header = ({ onTabChange, activeTab, onDeliveryDoubleClick }) => {
         </div>
       </div>
 
+      
+
       <div className="header-tabs-container">
         <div className="header-tabs">
           <div 
@@ -63,14 +70,13 @@ const Header = ({ onTabChange, activeTab, onDeliveryDoubleClick }) => {
             <span className="tab-icon">🍽️</span>
             <span className="tab-text">Dining Out</span>
           </div>
-                    <div 
+          <div 
             className={`tab ${activeTab === 'delivery' ? 'active' : ''}`}
             onClick={() => handleTabClick('delivery')}
           >
             <span className="tab-icon">🚚</span>
             <span className="tab-text">Delivery</span>
           </div>
-
           <div 
             className={`tab ${activeTab === 'nightlife' ? 'active' : ''}`}
             onClick={() => handleTabClick('nightlife')}
@@ -78,13 +84,10 @@ const Header = ({ onTabChange, activeTab, onDeliveryDoubleClick }) => {
             <span className="tab-icon">🍸</span>
             <span className="tab-text">Nightlife</span>
           </div>
-          
         </div>
       </div>
     </header>
-    
   );
 };
 
 export default Header;
-

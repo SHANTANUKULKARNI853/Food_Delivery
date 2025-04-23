@@ -161,10 +161,13 @@ const RestaurantDetail = () => {
       setIsLoading(false);
     }
   };
+  const handleBackClick = () => {
+    navigate('/', { state: { from: 'delivery' } });
+  };
 
   return (
     <div className="restaurant-detail-container">
-      <button className="back-button" onClick={() => navigate(-1)}>
+      <button className="back-button" onClick={handleBackClick}>
         &larr; Back to Restaurants
       </button>
       

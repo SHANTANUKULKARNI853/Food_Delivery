@@ -124,7 +124,7 @@ const RestaurantList = () => {
   ];
 
   const handleRestaurantClick = (id) => {
-    navigate(`/restaurant/${id}`);
+    navigate(`/restaurant/${id}`,{state: {from: 'delivery'}});
   };
 
   return (
