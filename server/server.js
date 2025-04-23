@@ -1,5 +1,11 @@
-const express = require('express');
 const dotenv = require('dotenv');
+const fs = require('fs');
+dotenv.config();
+console.log('Current directory:', process.cwd());
+console.log('.env exists?', fs.existsSync('.env'));
+console.log('MongoDB URI:', process.env.MONGODB_URI);
+
+const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');

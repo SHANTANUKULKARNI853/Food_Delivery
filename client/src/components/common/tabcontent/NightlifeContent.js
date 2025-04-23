@@ -1,14 +1,14 @@
 import React from 'react';
 import './TabContent.css'
 import NightlifeList from '../restaurant/NightRestuarant'
- 
- 
+
+
 const NightlifeContent = (showFilters2) => {
   return (
- 
+
 <div className="tab-content">
             <h2>Collections</h2>
- 
+
       {showFilters2 && (
         <div className="delivery-filters2">
           <div className="filter-item">
@@ -18,7 +18,7 @@ const NightlifeContent = (showFilters2) => {
                     <div className="filter-item">
             <span>Offers</span>
           </div>
- 
+
           <div className="filter-item">
             <span>Rating: 4.5+</span>
           </div>
@@ -40,11 +40,11 @@ const NightlifeContent = (showFilters2) => {
          
         </div>
 <NightlifeList/>
- 
+
     </div>
- 
- 
+
+
   );
 };
- 
+
 export default NightlifeContent;

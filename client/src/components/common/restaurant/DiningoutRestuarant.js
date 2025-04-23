@@ -80,7 +80,17 @@ const DiningoutRestaurantList = () => {
       deliveryTime: "7.5 km",
       costForTwo: 1300,
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744459227/a2_itv6hw.jpg`
-    }
+    },
+    {
+      id: "65d24f1a4f1a6d4f1a6d4f59",
+      name: "Lord of the Food ",
+      cuisine: ["Asian", "North Indian"],
+      rating: 4.2,
+      deliveryTime: "4.5 km",
+      costForTwo: 1100,
+      imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744451662/res1_vmxiem.jpg`,
+      discount: "50% OFF"
+    },
   ];
 
   return (

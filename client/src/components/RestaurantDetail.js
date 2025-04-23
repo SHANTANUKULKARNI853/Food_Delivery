@@ -130,62 +130,44 @@ const RestaurantDetail = () => {
   const handleAddToCart = async () => {
     setIsLoading(true);
     try {
-      // 1. Get token and user info from localStorage
-      const token = localStorage.getItem('token');
-      const userString = localStorage.getItem('user');
-  
-      if (!token || !userString) {
-        alert('You must be logged in to add items to the cart.');
-        setIsLoading(false);
-        return;
-      }
-  
-      const user = JSON.parse(userString);
-      const userId = user?._id;
-  
-      if (!userId) {
-        alert('User information is missing or invalid. Please log in again.');
-        setIsLoading(false);
-        return;
-      }
-  
-      // 2. Send add-to-cart request
+      const testUserId = "65d24f1a4f1a6d4f1a6d4f1a"; 
+      
       const response = await fetch('https://food-delivery-gj0r.onrender.com/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // If your API uses token-based auth
         },
         body: JSON.stringify({
-          userId,
+          userId: testUserId,
           productId: restaurant.id,
-          quantity: 1,
+          quantity: 1
         }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         console.error('API Error:', errorData);
-        throw new Error(errorData.message || 'Failed to add item to cart');
+        throw new Error(errorData.message || 'Failed to add to cart');
       }
-  
+
       const data = await response.json();
-      console.log('Add to cart success:', data);
+      console.log('API Success:', data);
       alert(`${restaurant.name} added to cart successfully!`);
       
     } catch (error) {
       console.error('Cart Error:', error);
-      alert(`Error: ${error.message || 'Something went wrong'}\nCheck console for details.`);
+      alert(`Error: ${error.message}\nCheck console for details.`);
     } finally {
       setIsLoading(false);
     }
   };
   const handleBackClick = () => {
-    navigate('/', { state: { from: 'dining' }, replace: true });
-  }  
+    navigate('/', { state: { from: 'delivery' } });
+  };
+
   return (
     <div className="restaurant-detail-container">
-     <button className="back-button" onClick={handleBackClick}>
+      <button className="back-button" onClick={handleBackClick}>
         &larr; Back to Restaurants
       </button>
       

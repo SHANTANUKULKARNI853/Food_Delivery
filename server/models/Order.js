@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema({
     {
       foodItem: { type: String, required: true },
       quantity: { type: Number, required: true },
-      costForTwo: { type: Number, required: true }
+      price: { type: Number, required: true }
     }
   ],
   totalAmount: {

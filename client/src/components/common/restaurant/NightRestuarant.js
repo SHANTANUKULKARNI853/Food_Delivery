@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RestuarantList.css';
- 
+
 const NightlifeList = () => {
   const navigate = useNavigate();
- 
+  
   const nightrestaurants = [
-    {    
+    {     
       id: "65d24g1a4g1a6d4g1a6d4g1a",
       name: "High Ultra Lounge",
       cuisine: ["Asian beers", "Whiskey"],
@@ -64,22 +64,22 @@ const NightlifeList = () => {
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744818361/an2_mqj2nx.jpg`,
       discount: "30% OFF"
     }
-   
+    
   ];
- 
+
   const handleRestaurantClick = (id) => {
     navigate(`/night-restaurant/${id}`,{state: {from: 'nightlife'}});
   };
- 
+
   return (
     <div className="restaurant-list-section">
       <div className="restaurant-list-container">
         <h3 className="section-title">Elevate your evening, one pour at a time</h3>
-       
+        
         <div className="restaurant-grid">
           {nightrestaurants.map((restaurant) => (
-            <div
-              key={restaurant.id}
+            <div 
+              key={restaurant.id} 
               className="restaurant-card"
               onClick={() => handleRestaurantClick(restaurant.id)}
             >
@@ -113,6 +113,5 @@ const NightlifeList = () => {
     </div>
   );
 };
- 
+
 export default NightlifeList;
- 

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
- 
+
 const SearchResults = ({ query, onClose }) => {
   const navigate = useNavigate();
   const [searchResults, setSearchResults] = useState([]);
   const resultsRef = useRef(null);
-  const searchInputRef = useRef(null);
- 
+  const searchInputRef = useRef(null); 
+
 const restaurants = [
     {
       id: "65d24f1a4f1a6d4f1a6d4f1a",
@@ -21,7 +21,7 @@ const restaurants = [
       cuisine: ["Pizzas", "Italian", "Desserts"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431332/rmcdonals_penc4r.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f1c",
@@ -29,7 +29,7 @@ const restaurants = [
       cuisine: ["North Indian", "Sweets", "Snacks"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431388/rhaldiramji_psuibi.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f1d",
@@ -37,7 +37,7 @@ const restaurants = [
       cuisine: ["Fried Chicken", "American", "Fast Food"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431348/rkfc_mg8weh.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f1e",
@@ -45,7 +45,7 @@ const restaurants = [
       cuisine: ["South Indian", "Tiffins"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431520/r_tiffins_lsb5me.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f1f",
@@ -53,7 +53,7 @@ const restaurants = [
       cuisine: ["Bakery", "Desserts", "Cakes"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431547/rcake_srdzyu.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f2a",
@@ -61,7 +61,7 @@ const restaurants = [
       cuisine: ["Juices", "Beverages"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431428/rfruit_juice_llht8z.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f2b",
@@ -69,7 +69,7 @@ const restaurants = [
       cuisine: ["South Indian"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431369/rhomelymeals_cx89el.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f2c",
@@ -77,7 +77,7 @@ const restaurants = [
       cuisine: ["North Indian", "Chinese"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431315/rmulticusine_gtuxui.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f2d",
@@ -85,7 +85,7 @@ const restaurants = [
       cuisine: ["Mithai", "Desserts"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431277/rsweets_jsbdmv.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f2e",
@@ -93,7 +93,7 @@ const restaurants = [
       cuisine: ["Street Food", "Hyderabadi"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431297/rpista_a0penq.jpg`,
           type: "delivery"
- 
+
     },
     {
       id: "65d24f1a4f1a6d4f1a6d4f2f",
@@ -101,17 +101,17 @@ const restaurants = [
       cuisine: ["Healthy Food", "Desserts"],
       imageUrl: `https://res.cloudinary.com/de79vmsoa/image/upload/v1744431410/rfruits_lghxok.jpg`,
           type: "delivery"
- 
+
     },
-   
+    
   ];
- 
+
   useEffect(() => {
     if (query.trim() === '') {
       setSearchResults([]);
       return;
     }
- 
+
     const results = restaurants.filter((restaurant) => {
       if (!restaurant.id || !restaurant.imageUrl) return false;
       return (
@@ -119,62 +119,62 @@ const restaurants = [
         restaurant.cuisine.some((c) => c.toLowerCase().includes(query.toLowerCase()))
       );
     });
- 
+
     setSearchResults(results);
   }, [query]);
- 
+
   const handleRestaurantClick = (id, event) => {
     if (event.type === 'contextmenu') {
       event.preventDefault();
     }
- 
+
     const restaurantExists = restaurants.some((r) => r.id === id);
     if (!restaurantExists) {
       console.error(`Restaurant with ID ${id} not found`);
       return;
     }
- 
+
     const isDiningRestaurant = false;
- 
+
     navigate(`/restaurant/${id}`, {
       state: { from: isDiningRestaurant ? 'dining' : 'delivery' },
     });
- 
+
     onClose();
   };
- 
+
   const handleKeyDown = (id, event) => {
     if (event.key === 'Enter') {
       handleRestaurantClick(id, event);
     }
   };
- 
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (resultsRef.current && !resultsRef.current.contains(event.target)) {
         onClose();
       }
     };
- 
+
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         onClose();
       }
     };
- 
+
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleEscape);
- 
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
     };
   }, [onClose]);
- 
+
   const searchInputWidth = searchInputRef.current ? searchInputRef.current.offsetWidth : '100%';
- 
+
   if (!query) return null;
- 
+
   return (
     <div className="search-results-container" style={styles.searchResultsContainer}>
       <div className="search-results-dropdown" ref={resultsRef} style={{ ...styles.searchResultsDropdown, width: searchInputWidth }}>
@@ -227,7 +227,7 @@ const styles = {
   searchResultsDropdown: {
     position: 'absolute',
     top: 'calc(100% + 30px)',
-    left: '-70px',
+    left: '-70px', 
     backgroundColor: '#fff',
     borderRadius: '8px',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
@@ -240,8 +240,8 @@ const styles = {
     minWidth: '500px',  
     transform: 'translateX(20px)',  
   },
- 
-  searchResultsList: {
+  
+  searchResultsList: { 
     listStyle: 'none',
     padding: '18px 10px',
     margin: 0,
@@ -287,5 +287,5 @@ const styles = {
     fontSize: '14px',
   },
 };
- 
+
 export default SearchResults;
