@@ -1,0 +1,261 @@
+.restaurant-list-section {
+    background-color: #f8f8f8;
+    padding: 1px 0;
+    width: 100%;
+}
+
+.restaurant-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #282c3f;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-btn {
+    background: white;
+    border: 1px solid #d4d5d9;
+    border-radius: 24px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #686b78;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.filter-btn:hover {
+    border-color: #fc8019;
+    color: #fc8019;
+}
+
+.filter-btn.active {
+    background: #fc8019;
+    color: white;
+    border-color: #fc8019;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.restaurant-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.promoted-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.restaurant-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.restaurant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.restaurant-card:hover .restaurant-image img {
+    transform: scale(1.05);
+}
+
+.discount-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    background: #256fef;
+    color: white;
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.restaurant-card:hover .discount-badge {
+    background: #1a5fd0;
+    transform: translateY(-2px);
+}
+
+.restaurant-details {
+    padding: 15px;
+}
+
+.restaurant-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #282c3f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s ease;
+}
+
+.restaurant-card:hover h3 {
+    color: #fc8019;
+}
+
+.cuisine {
+    color: #686b78;
+    font-size: 14px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.restaurant-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #686b78;
+    font-size: 14px;
+    padding-top: 15px;
+    border-top: 1px solid #e9e9eb;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #3d9b6d;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.restaurant-card:hover .rating {
+    color: #2e8b57;
+}
+
+.star {
+    font-size: 12px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9e9eb;
+}
+
+.menu-item-info {
+    flex: 1;
+}
+
+.menu-item-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.menu-item-price {
+    color: #3e4152;
+    font-weight: 500;
+}
+
+.menu-item-description {
+    color: #686b78;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.menu-item-add {
+    background: white;
+    border: 1px solid #d4d5d9;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: #60b246;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-item-add:hover {
+    background: #60b246;
+    color: white;
+    transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+    .restaurant-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .restaurant-grid {
+        gap: 20px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .restaurant-image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        gap: 10px;
+    }
+
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .restaurant-card:hover {
+        transform: translateY(-3px);
+    }
+}
