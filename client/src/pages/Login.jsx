@@ -41,17 +41,12 @@ function Login() {
             }
 
             const result = await response.json();
-            const { success, message, token } = result;
-
-            console.log('Login result:', result);
-
             if (result.message === 'Login successful') {
                 toast.success('Login successful. Redirecting to homepage...');
                 localStorage.setItem('user', JSON.stringify(result.user));
                 localStorage.setItem('token', result.token);
-                setTimeout(() => navigate('/'), 2000); // 2 second delay
-            }
-             else {
+                setTimeout(() => navigate('/'), 2000);
+            } else {
                 toast.error(result.message || 'Login failed');
             }
         } catch (err) {
@@ -60,55 +55,112 @@ function Login() {
         }
     };
 
+    // CSS-in-JS styles
+    const styles = {
+        loginPage: {
+            display: 'flex',
+            height: '100vh',
+            justifyContent: 'center',
+            alignItems: 'center',
+            background: 'linear-gradient(135deg, #f0edee, #75b0f5)'
+        },
+        loginContainer: {
+            display: 'flex',
+            width: '60%',
+            height: '70vh',
+            background: 'white',
+            boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
+            borderRadius: '10px',
+            overflow: 'hidden'
+        },
+        loginLeft: {
+            width: '40%',
+            background: 'linear-gradient(135deg, #ff758c, #ff7eb3)',
+            color: 'black',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            padding: '30px'
+        },
+        loginRight: {
+            width: '60%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            padding: '30px'
+        },
+        input: {
+            padding: '12px',
+            margin: '10px 0',
+            width: '100%',
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+            fontSize: '1rem'
+        },
+        button: {
+            background: '#6200ea',
+            color: 'white',
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            padding: '12px',
+            marginTop: '10px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            transition: '0.3s ease-in-out'
+        },
+        link: {
+            marginTop: '15px',
+            fontSize: '0.9rem',
+            color: '#6200ea',
+            cursor: 'pointer',
+            textAlign: 'center'
+        }
+    };
+
     return (
-        <div style={{ maxWidth: '400px', margin: '50px auto', padding: '30px', border: '1px solid #ccc', borderRadius: '10px' }}>
-            <h2 style={{ textAlign: 'center' }}>Login</h2>
-            <form onSubmit={handleLogin}>
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={loginInfo.email}
-                        onChange={handleChange}
-                        placeholder="Enter email"
-                        style={{ width: '100%', padding: '10px', marginTop: '5px' }}
-                    />
+        <div style={styles.loginPage}>
+            <div style={styles.loginContainer}>
+                <div style={styles.loginLeft}>
+                <h2>Welcome Back to Zomato!</h2>
+<p>Your cravings called... let's satisfy them 🍕</p>
+
                 </div>
-                <div style={{ marginBottom: '15px' }}>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={loginInfo.password}
-                        onChange={handleChange}
-                        placeholder="Enter password"
-                        style={{ width: '100%', padding: '10px', marginTop: '5px' }}
-                    />
+                <div style={styles.loginRight}>
+                    <form onSubmit={handleLogin} style={{ width: '100%', maxWidth: '320px', display: 'flex', flexDirection: 'column' }}>
+                        <input
+                            type="email"
+                            name="email"
+                            value={loginInfo.email}
+                            onChange={handleChange}
+                            placeholder="Enter email"
+                            style={styles.input}
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            value={loginInfo.password}
+                            onChange={handleChange}
+                            placeholder="Enter password"
+                            style={styles.input}
+                        />
+                        <button
+                            type="submit"
+                            style={styles.button}
+                            onMouseOver={(e) => (e.target.style.background = '#3700b3')}
+                            onMouseOut={(e) => (e.target.style.background = '#6200ea')}
+                        >
+                            Login
+                        </button>
+                        <p style={styles.link}>
+                            Don't have an account? <Link to="/signup">Signup</Link>
+                        </p>
+                    </form>
                 </div>
-                <button 
-  type="submit" 
-  style={{
-    display: 'inline-block',
-    padding: '12px 20px', 
-    backgroundColor: '#4CAF50', 
-    color: 'white', 
-    border: 'none', 
-    borderRadius: '5px', 
-    fontSize: '16px', 
-    cursor: 'pointer', 
-    transition: 'background-color 0.3s ease, transform 0.2s ease'
-  }} 
-  onMouseOver={(e) => e.target.style.backgroundColor = '#45a049'}
-  onMouseOut={(e) => e.target.style.backgroundColor = '#4CAF50'}
-  onClick={() => console.log('Login clicked')}
->
-  Login
-</button>
-                <p style={{ marginTop: '10px', textAlign: 'center' }}>
-                    Don't have an account? <Link to="/signup">Signup</Link>
-                </p>
-            </form>
+            </div>
             <ToastContainer />
         </div>
     );
