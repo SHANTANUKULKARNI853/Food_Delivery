@@ -135,7 +135,7 @@ We welcome contributions to the Food Delivery app! If you'd like to contribute, 
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.This repository is for educational purposes only and should not be used in production environments
 
 ## 🙏 Acknowledgments
 
